@@ -2,13 +2,14 @@ const setHTML = (data, detailsContainer) => {
     data.forEach(player => {
         console.log(player)
         const div = document.createElement('div');
+        div.classList.add('card','mb-3')
         div.innerHTML = `
         <div class="row g-0">
             <div class="col-12">
               <img
-                src="${player.strBanner}"
+                src="${player.strBanner?player.strBanner:'No Banner'}"
                 class="w-100"
-                alt="..."
+                alt="No Banner"
               />
             </div>
           </div>
@@ -17,25 +18,25 @@ const setHTML = (data, detailsContainer) => {
               <img
                 src="${player.strCutout}"
                 class="img-fluid rounded-start"
-                alt="..."
+                alt="No Image"
               />
             </div>
             <div class="col-md-8">
                 
               <div class="card-body h-100 d-flex flex-column justify-content-evenly">
-                <h5 class="card-title">${player.strPlayer}</h5>
+                <h5 class="card-title">${player.strPlayer} (${player.strSport})</h5>
                 <div class="row g-0">
                     <div class="col-6 ">
-                        <p>DOB : ${player.dateBorn}</p>
-                        <p>B.Place : ${player.strBirthLocation}</p>
-                        <p>Nationality : ${player.strNationality}</p>
-                        <p>Income : ${player.strWage}</p>
+                        <p>DOB : ${player.dateBorn?player.dateBorn:'No Info'}</p>
+                        <p>B.Place : ${player.strBirthLocation?player.strBirthLocation:'No Info'}</p>
+                        <p>Nationality : ${player.strNationality?player.strNationality:'No Info'}</p>
+                        <p>Income : ${player.strWage ? player.strWage : 'No Info'}</p>
                     </div>
                     <div class="col-6">
-                        <p>Height : ${player.strHeight}</p>
-                        <p>Weight : ${player.strWeight}</p>
-                        <p>Team : ${player.strTeam}</p>
-                        <p>Jersey No : ${player.strNumber}</p>
+                        <p>Height : ${player.strHeight?player.strHeight:'No Info'}</p>
+                        <p>Weight : ${player.strWeight?player.strWeight:'No Info'}</p>
+                        <p>Club : ${player.strTeam?player.strTeam : 'No Info'}</p>
+                        <p>Jersey No : ${player.strNumber?player.strNumber : 'No Info'}</p>
                     </div>
                 </div>
               </div>
@@ -56,8 +57,14 @@ const setHTML = (data, detailsContainer) => {
 
 }
 const loadData = (data) => {
-    const url = `https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${data}`
-    fetch(url).then(response => response.json()).then(json => displayData(json.player))
+    if (data != '') {
+        const url = `https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${data}`
+        fetch(url).then(response => response.json()).then(json => displayData(json.player))
+    } else {
+        alert('Enter Player Name to Search.');
+        return;
+    }
+    
 }
 
 const displayData = (data) => {
