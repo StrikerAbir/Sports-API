@@ -6,7 +6,7 @@ const setHTML = (data, detailsContainer) => {
         <div class="row g-0">
             <div class="col-12">
               <img
-                src=""
+                src="${player.strBanner}"
                 class="w-100"
                 alt="..."
               />
@@ -15,7 +15,7 @@ const setHTML = (data, detailsContainer) => {
           <div class="row g-0 mt-2">
             <div class="col-md-4">
               <img
-                src="https://www.thesportsdb.com/images/media/player/cutout/a5bs0i1631443801.png"
+                src="${player.strCutout}"
                 class="img-fluid rounded-start"
                 alt="..."
               />
@@ -23,19 +23,19 @@ const setHTML = (data, detailsContainer) => {
             <div class="col-md-8">
                 
               <div class="card-body h-100 d-flex flex-column justify-content-evenly">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">${player.strPlayer}</h5>
                 <div class="row g-0">
                     <div class="col-6 ">
-                        <p>DOB : </p>
-                        <p>B.Place : </p>
-                        <p>Nationality : </p>
-                        <p>Income : (per/week)</p>
+                        <p>DOB : ${player.dateBorn}</p>
+                        <p>B.Place : ${player.strBirthLocation}</p>
+                        <p>Nationality : ${player.strNationality}</p>
+                        <p>Income : ${player.strWage}</p>
                     </div>
                     <div class="col-6">
-                        <p>Height : </p>
-                        <p>Weight : </p>
-                        <p>Team : </p>
-                        <p>Jersey No : </p>
+                        <p>Height : ${player.strHeight}</p>
+                        <p>Weight : ${player.strWeight}</p>
+                        <p>Team : ${player.strTeam}</p>
+                        <p>Jersey No : ${player.strNumber}</p>
                     </div>
                 </div>
               </div>
@@ -45,14 +45,13 @@ const setHTML = (data, detailsContainer) => {
             <div class="col-12">
               <div class="card-body">
                 <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
+                  ${player.strDescriptionEN}
                 </p>
               </div>
             </div>
           </div>
     `
+        detailsContainer.appendChild(div);
     })
 
 }
